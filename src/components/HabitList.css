@@ -1,0 +1,31 @@
+.habit-list h3 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.habit-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.habit-list-empty {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  border-style: dashed;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.habit-list-empty p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}

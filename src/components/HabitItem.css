@@ -1,0 +1,88 @@
+.habit-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.habit-item:hover {
+  border-color: var(--accent-primary);
+}
+
+.habit-item.completed .habit-name {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.habit-checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.habit-checkbox:hover {
+  border-color: var(--accent-success);
+}
+
+.habit-checkbox.checked {
+  background: var(--accent-success);
+  border-color: var(--accent-success);
+}
+
+.habit-checkbox svg {
+  width: 16px;
+  height: 16px;
+  color: white;
+}
+
+.habit-name {
+  flex: 1;
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+}
+
+.habit-delete {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.habit-item:hover .habit-delete {
+  opacity: 1;
+}
+
+.habit-delete:hover {
+  background: rgba(248, 81, 73, 0.1);
+  color: #f85149;
+}
+
+.habit-delete svg {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 600px) {
+  .habit-delete {
+    opacity: 1;
+  }
+}
