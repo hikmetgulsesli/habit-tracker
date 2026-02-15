@@ -87,3 +87,4 @@ As a user, I want a modern dark theme so that the app is easy on the eyes.
 - Clean, minimalist design
 - Responsive layout
 - Accessible contrast ratios
+test
