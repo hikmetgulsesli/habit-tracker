@@ -3,9 +3,20 @@ import HabitList from './components/HabitList';
 import Heatmap from './components/Heatmap';
 import StreakCounter from './components/StreakCounter';
 import AddHabit from './components/AddHabit';
+import LookupAdmin from './components/LookupAdmin.jsx';
+import NotificationPermissionDialog, { 
+  getNotificationState, 
+  saveNotificationState, 
+  requestNotificationPermission,
+  scheduleEventReminder 
+} from './components/NotificationPermissionDialog.jsx';
 import './App.css';
 
 function App() {
+  const [activeTab, setActiveTab] = useState('habits');
+  const [showNotificationDialog, setShowNotificationDialog] = useState(false);
+  const [notificationState, setNotificationState] = useState({ hasAsked: false, permission: 'default' });
+
   const [habits, setHabits] = useState(() => {
     const saved = localStorage.getItem('habits');
     return saved ? JSON.parse(saved) : [];
@@ -15,6 +26,12 @@ function App() {
     const saved = localStorage.getItem('completions');
     return saved ? JSON.parse(saved) : {};
   });
+
+  useEffect(() => {
+    // Load notification state on mount
+    const state = getNotificationState();
+    setNotificationState(state);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('habits', JSON.stringify(habits));
@@ -31,6 +48,33 @@ function App() {
       createdAt: new Date().toISOString(),
     };
     setHabits([...habits, newHabit]);
+    
+    // Show notification permission dialog after first habit creation
+    const state = getNotificationState();
+    if (!state.hasAsked) {
+      setShowNotificationDialog(true);
+    }
+  };
+
+  const handleAllowNotifications = async () => {
+    const permission = await requestNotificationPermission();
+    const newState = { hasAsked: true, permission };
+    saveNotificationState(newState);
+    setNotificationState(newState);
+    setShowNotificationDialog(false);
+    
+    // Schedule a test notification for demonstration (5 seconds from now)
+    if (permission === 'granted') {
+      const testTime = new Date(Date.now() + 5000);
+      scheduleEventReminder('Test Etkinlik', testTime.toISOString());
+    }
+  };
+
+  const handleDenyNotifications = () => {
+    const newState = { hasAsked: true, permission: 'denied' };
+    saveNotificationState(newState);
+    setNotificationState(newState);
+    setShowNotificationDialog(false);
   };
 
   const deleteHabit = (id) => {
@@ -142,22 +186,50 @@ function App() {
       <header className="app-header">
         <h1>🔥 Habit Tracker</h1>
         <p>Build better habits, one day at a time</p>
+        
+        <nav className="app-nav">
+          <button 
+            className={`nav-tab ${activeTab === 'habits' ? 'active' : ''}`}
+            onClick={() => setActiveTab('habits')}
+          >
+            Habits
+          </button>
+          <button 
+            className={`nav-tab ${activeTab === 'admin' ? 'active' : ''}`}
+            onClick={() => setActiveTab('admin')}
+          >
+            Lookup Admin
+          </button>
+        </nav>
       </header>
 
       <main className="app-main">
-        <StreakCounter current={streaks.current} longest={streaks.longest} />
-        
-        <Heatmap data={heatmapData} />
-        
-        <AddHabit onAdd={addHabit} />
-        
-        <HabitList
-          habits={habits}
-          onDelete={deleteHabit}
-          onToggle={toggleHabit}
-          isCompleted={isHabitCompletedToday}
-        />
+        {activeTab === 'habits' ? (
+          <>
+            <StreakCounter current={streaks.current} longest={streaks.longest} />
+            
+            <Heatmap data={heatmapData} />
+            
+            <AddHabit onAdd={addHabit} />
+            
+            <HabitList
+              habits={habits}
+              onDelete={deleteHabit}
+              onToggle={toggleHabit}
+              isCompleted={isHabitCompletedToday}
+            />
+          </>
+        ) : (
+          <LookupAdmin />
+        )}
       </main>
+      
+      <NotificationPermissionDialog
+        isOpen={showNotificationDialog}
+        onClose={handleDenyNotifications}
+        onAllow={handleAllowNotifications}
+        onDeny={handleDenyNotifications}
+      />
     </div>
   );
 }
