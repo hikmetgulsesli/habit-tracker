@@ -1,0 +1,58 @@
+.day-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: var(--bg-secondary, #161b22);
+  border: 1px solid var(--border-color, #30363d);
+  border-bottom: none;
+}
+
+.day-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.day-name {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #8b949e);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.day-date {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary, #c9d1d9);
+}
+
+.day-stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.event-count {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #8b949e);
+  background-color: var(--bg-tertiary, #21262d);
+  padding: 6px 12px;
+  border-radius: 12px;
+}
+
+.day-grid {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: var(--border-color, #30363d);
+  border: 1px solid var(--border-color, #30363d);
+  flex: 1;
+}

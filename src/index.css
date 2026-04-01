@@ -19,6 +19,10 @@
   --heatmap-2: #006d32;
   --heatmap-3: #26a641;
   --heatmap-4: #39d353;
+  --event-work: #58a6ff;
+  --event-personal: #238636;
+  --event-meeting: #f0883e;
+  --event-reminder: #8957e5;
 }
 
 body {

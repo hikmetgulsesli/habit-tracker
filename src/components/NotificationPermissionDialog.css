@@ -1,0 +1,94 @@
+.notification-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.notification-dialog {
+  background-color: var(--bg-secondary, #161b22);
+  border: 1px solid var(--border-color, #30363d);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notification-dialog-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary, #c9d1d9);
+  margin-bottom: 12px;
+}
+
+.notification-dialog-text {
+  font-size: 1rem;
+  color: var(--text-secondary, #8b949e);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.notification-dialog-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.notification-dialog-button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.notification-dialog-button-allow {
+  background-color: var(--accent-success, #238636);
+  color: white;
+}
+
+.notification-dialog-button-allow:hover {
+  background-color: #2ea043;
+}
+
+.notification-dialog-button-deny {
+  background-color: var(--bg-tertiary, #21262d);
+  color: var(--text-secondary, #8b949e);
+  border: 1px solid var(--border-color, #30363d);
+}
+
+.notification-dialog-button-deny:hover {
+  background-color: var(--bg-primary, #0d1117);
+  color: var(--text-primary, #c9d1d9);
+}
