@@ -1,0 +1,72 @@
+.calendar-event {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: grab;
+  user-select: none;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.calendar-event:hover {
+  filter: brightness(1.1);
+}
+
+.calendar-event:active {
+  cursor: grabbing;
+}
+
+.calendar-event.dragging {
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.calendar-event.month-view {
+  margin: 2px 0;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+}
+
+.calendar-event.week-view,
+.calendar-event.day-view {
+  margin: 2px 4px;
+  padding: 6px 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.event-dot {
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.event-time {
+  font-size: 0.65rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.event-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+/* Dark theme drag feedback - no white backgrounds */
+.calendar-event.dragging {
+  background-color: var(--bg-tertiary, #21262d) !important;
+  border: 2px solid var(--accent-primary, #58a6ff);
+  color: var(--text-primary, #c9d1d9);
+}
